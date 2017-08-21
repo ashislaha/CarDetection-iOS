@@ -36,6 +36,21 @@ class BaseViewController: UIViewController , UIImagePickerControllerDelegate, UI
     }
     var classifier : Classifier = .DNN
     
+    @IBAction func chooseClassifier(_ sender: UIBarButtonItem) {
+        let actionSheet = UIAlertController(title: "Classfier", message: "", preferredStyle: .actionSheet)
+        let dnn = UIAlertAction(title: "DNN (Default)", style: .default) { [weak self] (action) in
+            self?.classifier = .DNN
+        }
+        let cnn = UIAlertAction(title: "CNN", style: .default) { [weak self] (action) in
+            self?.classifier = .CNN
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        actionSheet.addAction(dnn)
+        actionSheet.addAction(cnn)
+        actionSheet.addAction(cancel)
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
     @IBOutlet weak var imageView: UIImageView! {
         didSet {
             imageView.isHidden = true
@@ -71,7 +86,7 @@ class BaseViewController: UIViewController , UIImagePickerControllerDelegate, UI
         let imagePickerVC = UIImagePickerController()
         imagePickerVC.delegate = self
         
-        let actionSheet = UIAlertController(title: "Take Photo", message: "Digit Recognize", preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(title: "Take Photo", message: "Car Detection", preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { [weak self] (action) in
             imagePickerVC.sourceType = .camera
             self?.present(imagePickerVC, animated: true, completion: nil)
@@ -112,23 +127,41 @@ class BaseViewController: UIViewController , UIImagePickerControllerDelegate, UI
         
         imageView.image = imageInfo.image
         label.isHidden = false
-        
-        let mlModel = car_detection_keras_DNN()     // Input Matrix is [10000] Matrix - 1D Matrix
-        self.classifier = .DNN
-        
-        guard let inputMatrix = try? MLMultiArray(shape: [10000], dataType: .double) else { fatalError("Unexpected runtime error. MLMultiArray") }
-        
-        // Feed data to inputMatrix
-        for i in 0..<row*column { inputMatrix[i] = NSNumber(value: imageInfo.pixel[i]) }
-        
-        if let prediction = try? mlModel.prediction(input1: inputMatrix) {
-            let outputs = prediction.output1
-            print(outputs)
-            var outputArray = [Double]()
-            for i in 0..<classes { outputArray.append(Double(truncating: outputs[i])) }
+
+        if classifier == .DNN {
+            let mlModel = car_detection_keras_DNN()    // Input Matrix is [10000] Matrix - 1D Matrix
+            guard let inputMatrix = try? MLMultiArray(shape: [10000], dataType: .double) else { fatalError("Unexpected runtime error. MLMultiArray") }
             
-            label.text = outputArray[0] > outputArray[1] ?  "It's A CAR" : "It's not a CAR"
+            // Feed data to inputMatrix
+            for i in 0..<row*column { inputMatrix[i] = NSNumber(value: imageInfo.pixel[i]) }
+            
+            if let prediction = try? mlModel.prediction(input1: inputMatrix) {
+                let outputs = prediction.output1
+                print(outputs)
+                var outputArray = [Double]()
+                for i in 0..<classes { outputArray.append(Double(truncating: outputs[i])) }
+                
+                label.text = outputArray[0] > outputArray[1] ?  "It's A CAR" : "It's not a CAR"
+            }
+        } else if self.classifier == .CNN {
+            let mlModel = car_detection_keras_CNN() // Input Matrix is [1, 100, 100] Matrix - 1D Matrix
+            
+            guard let inputMatrix = try? MLMultiArray(shape: [1,100,100], dataType: .double) else { fatalError("Unexpected runtime error. MLMultiArray") }
+            
+            // Feed data to inputMatrix
+            for i in 0..<row*column { inputMatrix[i] = NSNumber(value: imageInfo.pixel[i]) }
+            
+            if let prediction = try? mlModel.prediction(input1: inputMatrix) {
+                let outputs = prediction.output1
+                print(outputs)
+                var outputArray = [Double]()
+                for i in 0..<classes { outputArray.append(Double(truncating: outputs[i])) }
+                
+                label.text = outputArray[0] > outputArray[1] ?  "It's A CAR" : "It's not a CAR"
+            }
         }
+        
+
         actionType = .takePhoto
     }
     
