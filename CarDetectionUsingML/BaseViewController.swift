@@ -34,19 +34,26 @@ class BaseViewController: UIViewController , UIImagePickerControllerDelegate, UI
             }
         }
     }
-    var classifier : Classifier = .DNN
+    var classifier : Classifier = .CNN {
+        didSet {
+            switch classifier {
+            case .CNN : title = "CNN"
+            case .DNN : title = "DNN"
+            }
+        }
+    }
     
     @IBAction func chooseClassifier(_ sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: "Classfier", message: "", preferredStyle: .actionSheet)
-        let dnn = UIAlertAction(title: "DNN (Default)", style: .default) { [weak self] (action) in
+        let dnn = UIAlertAction(title: "DNN", style: .default) { [weak self] (action) in
             self?.classifier = .DNN
         }
-        let cnn = UIAlertAction(title: "CNN", style: .default) { [weak self] (action) in
+        let cnn = UIAlertAction(title: "CNN (Default)", style: .default) { [weak self] (action) in
             self?.classifier = .CNN
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        actionSheet.addAction(dnn)
         actionSheet.addAction(cnn)
+        actionSheet.addAction(dnn)
         actionSheet.addAction(cancel)
         self.present(actionSheet, animated: true, completion: nil)
     }

@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		800397891F496BAE00168459 /* car_detection_keras_DNN.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 800397881F496BAE00168459 /* car_detection_keras_DNN.mlmodel */; };
-		80E0A2A61F4A9D94006D0A79 /* car_detection_keras_CNN.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 80E0A2A51F4A9D61006D0A79 /* car_detection_keras_CNN.mlmodel */; };
+		805EC7711F4D9CC0005CD535 /* car_detection_keras_CNN.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 808EDAAA1F4D9C7700BE1D2F /* car_detection_keras_CNN.mlmodel */; };
+		805EC7721F4D9CC6005CD535 /* car_detection_keras_DNN.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 808EDAAC1F4D9C8100BE1D2F /* car_detection_keras_DNN.mlmodel */; };
 		80FCBB4C1F2C60180081A0B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FCBB4B1F2C60180081A0B8 /* AppDelegate.swift */; };
 		80FCBB4E1F2C60180081A0B8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FCBB4D1F2C60180081A0B8 /* BaseViewController.swift */; };
 		80FCBB511F2C60180081A0B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80FCBB4F1F2C60180081A0B8 /* Main.storyboard */; };
@@ -38,8 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		800397881F496BAE00168459 /* car_detection_keras_DNN.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = car_detection_keras_DNN.mlmodel; sourceTree = "<group>"; };
-		80E0A2A51F4A9D61006D0A79 /* car_detection_keras_CNN.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = car_detection_keras_CNN.mlmodel; sourceTree = "<group>"; };
+		808EDAAA1F4D9C7700BE1D2F /* car_detection_keras_CNN.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = car_detection_keras_CNN.mlmodel; sourceTree = "<group>"; };
+		808EDAAC1F4D9C8100BE1D2F /* car_detection_keras_DNN.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = car_detection_keras_DNN.mlmodel; sourceTree = "<group>"; };
 		80FCBB481F2C60180081A0B8 /* CarDetectionUsingML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarDetectionUsingML.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80FCBB4B1F2C60180081A0B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		80FCBB4D1F2C60180081A0B8 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -154,9 +154,9 @@
 		80FCBB7E1F2C63300081A0B8 /* Machine Learning Modules */ = {
 			isa = PBXGroup;
 			children = (
-				800397881F496BAE00168459 /* car_detection_keras_DNN.mlmodel */,
-				80E0A2A51F4A9D61006D0A79 /* car_detection_keras_CNN.mlmodel */,
 				80FCBB801F2C63300081A0B8 /* ImagePreProcessing.swift */,
+				808EDAAA1F4D9C7700BE1D2F /* car_detection_keras_CNN.mlmodel */,
+				808EDAAC1F4D9C8100BE1D2F /* car_detection_keras_DNN.mlmodel */,
 			);
 			path = "Machine Learning Modules";
 			sourceTree = "<group>";
@@ -298,10 +298,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80E0A2A61F4A9D94006D0A79 /* car_detection_keras_CNN.mlmodel in Sources */,
 				80FCBB831F2C63300081A0B8 /* ImagePreProcessing.swift in Sources */,
+				805EC7721F4D9CC6005CD535 /* car_detection_keras_DNN.mlmodel in Sources */,
+				805EC7711F4D9CC0005CD535 /* car_detection_keras_CNN.mlmodel in Sources */,
 				80FCBB541F2C60180081A0B8 /* CarDetectionUsingML.xcdatamodeld in Sources */,
-				800397891F496BAE00168459 /* car_detection_keras_DNN.mlmodel in Sources */,
 				80FCBB4E1F2C60180081A0B8 /* BaseViewController.swift in Sources */,
 				80FCBB4C1F2C60180081A0B8 /* AppDelegate.swift in Sources */,
 			);
